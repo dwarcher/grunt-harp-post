@@ -1,0 +1,123 @@
+var fs = require('fs');
+var moment = require('moment');
+var inquirer = require('inquirer');
+var exec = require('child_process').exec;
+var jf = require('jsonfile');
+
+var curTime = moment();
+
+var contentTypeArg = "post";
+
+if(process.argv.length > 2)
+{
+  contentTypeArg = process.argv[2]; 
+}
+ 
+// The 'questions' for each type.
+var contentTypes = {
+  post: {
+    path: "posts/",
+    templatePath: "build/templates/post.md",
+    questions: [ 
+      { 
+        type: "input", 
+        message: "Title",
+        name: "title",
+        default: "untitled" 
+      },
+      { 
+        type: "date", 
+        message: "Date (MM-DD-YYYY)",
+        name: "date",
+        default: curTime.format("MM-DD-YYYY")
+      },
+      {
+        type: "checkbox",
+        message: "Categories",
+        name: "categories",
+        choices: [ 
+          "News",
+          "Social",
+          "SEO",
+          "Technology",
+          "Press Release",
+        ]
+      }
+    ]
+  }
+}
+
+var contentType = contentTypes[contentTypeArg];
+console.log("\nAdding content type: " + contentTypeArg + "\n");
+
+function slugify (sz) {
+  return sz.toLowerCase().replace(/[^a-z0-9]/g, '-');
+}
+
+function copyFile(source, target, cb) {
+  var cbCalled = false;
+
+  var rd = fs.createReadStream(source);
+  rd.on("error", function(err) {
+    done(err);
+  });
+  var wr = fs.createWriteStream(target);
+  wr.on("error", function(err) {
+    done(err);
+  });
+  wr.on("close", function(ex) {
+    done();
+  });
+  rd.pipe(wr);
+
+  function done(err) {
+    if (!cbCalled) {
+      cb(err);
+      cbCalled = true;
+    }
+  }
+}
+
+
+var contentDataFile = "public/" + contentType.path + "_data.json";
+
+var blogEntries = jf.readFileSync(contentDataFile);
+
+inquirer.prompt( contentType.questions, function(answers) {
+    var pickedDate = moment(answers.date, "MM-DD-YYYY");
+    var sluggedTitle = slugify(answers.title);
+    var fileName = pickedDate.format("YYYY-MM-DD") + "-" + sluggedTitle;
+
+    // add extra date info
+    answers.date = pickedDate.format();
+    answers.month = pickedDate.format("MM");
+    answers.day = pickedDate.format("DD");
+    answers.year =pickedDate.format("YYYY");
+
+    // update blog entries..
+    blogEntries[fileName] = answers;
+
+    // write updated data file
+    jf.writeFileSync(contentDataFile, blogEntries);
+
+    var destPath = "public/" + contentType.path + fileName + ".md";
+
+    copyFile(contentType.templatePath, destPath, function() {
+      console.log("Completed!\n");
+
+   
+      exec('open ' + destPath, function (error, stdout, stderr) {
+        // output is in stdout
+      });
+
+      exec('open http://localhost:9000/' + contentType.path + fileName + ".html", function (error, stdout, stderr) {
+        // output is in stdout
+      });
+
+      process.exit(0);
+
+    });
+
+
+
+} );
