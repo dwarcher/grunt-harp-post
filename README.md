@@ -1,6 +1,6 @@
 # grunt-harp-post
 
-> Task that interactively creates blog posts or other content for HARP
+> Task that interactively creates blog posts or other content for [HARP](harpjs.com)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -16,6 +16,10 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 ```js
 grunt.loadNpmTasks('grunt-harp-post');
 ```
+
+## What it does
+
+This task creates a new blog (or other content type) page on your harp.js website and updates the associated `_data.json` file. When you run the task, it will interactively ask you to fill in any meta data. The task will automatically turn your content title into a slug, which is used as the file name. These fields are configurable, so you can make your own content types. You can also define multiple tasks for different content types, eg: `harp_post:blog`, `harp_post:article`, etc.
 
 ## The "harp_post" task
 
@@ -115,6 +119,20 @@ grunt.initConfig({
   },
 });
 ```
+
+The above code might produce the following entry in the `_data.json` file.
+```js
+  "2014-10-07-test2": {
+    "title": "test2",
+    "date": "2014-10-07T00:00:00-04:00",
+    "categories": [
+      "News"
+    ],
+    "month": "10",
+    "day": "07",
+    "year": "2014"
+  }
+  ```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
