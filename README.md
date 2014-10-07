@@ -68,7 +68,24 @@ By default, `title` and `Date` questions will be asked (and cannot be removed).
 
 ### Usage Examples
 
-#### Default Options
+#### Basic usage
+In this example, we're defining a custom checkbox type. 
+
+```js
+grunt.initConfig({
+  harp_post: {
+      post: {
+        options: { 
+          destFolderBase: "public/",
+          templatePath: "templates/post.md",
+        }
+      }
+  },
+});
+```
+
+
+#### Custom question example
 In this example, we're defining a custom checkbox type. 
 
 ```js
