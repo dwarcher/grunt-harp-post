@@ -37,47 +37,63 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.destFolderBase
 Type: `String`
-Default value: `',  '`
+Default value: `'public/'`
 
-A string value that is used to do something with whatever.
+The location of your harp public folder.
 
-#### options.punctuation
+#### options.templatePath
 Type: `String`
-Default value: `'.'`
+Default value: `templates/post.md`
 
-A string value that is used to do something else with whatever else.
+The location of a file that will be copied in as the template of your post. If it doesn't exist, a blank file will be created.
+
+#### options.path
+Type: `String`
+Default value: `post/`
+
+The location to put your new content type (relative to `options.destFolderBase`). 
+
+#### options.fields
+Type: `Array`
+Default value: `templates/post.md`
+
+An array of questions to ask the user. The results of which are entered into your _data.json in the folder of your content type.
+
+See the great [Inquirer.js](https://github.com/SBoudrias/Inquirer.js/) for instructions on how to format your questions.
+
+By default, `title` and `Date` questions will be asked (and cannot be removed).
+
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, we're defining a custom checkbox type. 
 
 ```js
 grunt.initConfig({
   harp_post: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  harp_post: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+      post: {
+        options: { 
+          destFolderBase: "tmp/",
+          templatePath: "template/post.md",
+          fields: [
+            {
+              type: "checkbox",
+              message: "Categories",
+              name: "categories",
+              choices: [ 
+                "News",
+                "Social",
+                "SEO",
+                "Technology",
+                "Press Release",
+              ]
+            }
+          ]
+        }
+      }
   },
 });
 ```

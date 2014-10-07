@@ -77,7 +77,9 @@ module.exports = function(grunt) {
     var options = this.options({
       openPage: false,
       editPage: false,
-      destFolderBase: "public/"
+      destFolderBase: "public/",
+      path: "post/",
+      templatePath: "templates/post.md",
     });
 
     if(options.path)
