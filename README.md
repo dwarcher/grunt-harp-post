@@ -93,8 +93,8 @@ grunt.initConfig({
   harp_post: {
       post: {
         options: { 
-          destFolderBase: "tmp/",
-          templatePath: "template/post.md",
+          destFolderBase: "public/",
+          templatePath: "templates/post.md",
           fields: [
             {
               type: "checkbox",
