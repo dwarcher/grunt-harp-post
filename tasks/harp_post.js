@@ -78,7 +78,7 @@ module.exports = function(grunt) {
       openPage: false,
       editPage: false,
       destFolderBase: "public/",
-      path: "post/",
+      path: "posts/",
       templatePath: "templates/post.md",
     });
 

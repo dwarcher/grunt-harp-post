@@ -51,7 +51,7 @@ The location of a file that will be copied in as the template of your post. If i
 
 #### options.path
 Type: `String`
-Default value: `post/`
+Default value: `posts/`
 
 The location to put your new content type (relative to `options.destFolderBase`). 
 
@@ -76,7 +76,7 @@ grunt.initConfig({
   harp_post: {
       post: {
         options: { 
-          destFolderBase: "public/",
+          path: "posts/",
           templatePath: "templates/post.md",
         }
       }
@@ -95,6 +95,7 @@ grunt.initConfig({
         options: { 
           destFolderBase: "public/",
           templatePath: "templates/post.md",
+          path: "posts/",
           fields: [
             {
               type: "checkbox",
