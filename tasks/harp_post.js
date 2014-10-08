@@ -6,6 +6,11 @@
  * Licensed under the MIT license.
  */
 
+ /*
+  * TODO:
+  * - Make it so slug (filename) format is configurable? Time / no time?
+  */ 
+
 'use strict';
 
 module.exports = function(grunt) {
@@ -52,8 +57,7 @@ module.exports = function(grunt) {
         }
       }
     }
-
-
+    
     var baseContentType = {
       path: "posts/",
       templatePath: "templates/post.md",
@@ -98,11 +102,8 @@ module.exports = function(grunt) {
       baseContentType.questions = baseContentType.questions.concat(options.fields);
     }
 
-
     var contentType = baseContentType;
-
     var contentDataFile = options.destFolderBase + contentType.path + "_data.json";
-
     var blogEntries;
 
     if (fs.existsSync(contentDataFile)) {
@@ -136,17 +137,15 @@ module.exports = function(grunt) {
         var destPath = options.destFolderBase + contentType.path + fileName + ".md";
         copyFile(contentType.templatePath, destPath, function() {
         console.log("Created " + destPath + "\n");
-
-          // FIXME: make these optional
        
-       if(options.editPage)
-       {
+        if(options.editPage)
+        {
           // attempt to edit the page.. Note that this probably only works on macs.
 
           exec('open ' + destPath, function (error, stdout, stderr) {
             // output is in stdout
           });        
-       }
+        }
 
         if(options.openPage)
         {
