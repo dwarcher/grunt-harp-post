@@ -2,7 +2,7 @@
 
 > Task that interactively creates blog posts or other content for [HARP](http://harpjs.com)
 
-<img src="http://fat.gfycat.com/BaggyPositiveAntelopegroundsquirrel.gif" />
+<img src="http://zippy.gfycat.com/IckyPepperyKusimanse.gif" />
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
