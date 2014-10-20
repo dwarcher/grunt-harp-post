@@ -2,6 +2,8 @@
 
 > Task that interactively creates blog posts or other content for [HARP](http://harpjs.com)
 
+<iframe src="http://gfycat.com/ifr/BaggyPositiveAntelopegroundsquirrel" frameborder="0" scrolling="no" width="568" height="354" style="-webkit-backface-visibility: hidden;-webkit-transform: scale(1);" ></iframe>
+
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
