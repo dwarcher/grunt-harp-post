@@ -26,6 +26,7 @@ module.exports = function(grunt) {
     var exec = require('child_process').exec;
     var jf = require('jsonfile');
     var mkdirp = require('mkdirp');
+    var _path = require('path');
 
     var curTime = moment();
 
@@ -147,7 +148,9 @@ module.exports = function(grunt) {
 
         jf.writeFileSync(contentDataFile, blogEntries);
 
-        var destPath = options.destFolderBase + contentType.path + fileName + ".md";
+        var extension = _path.extname(contentType.templatePath);
+
+        var destPath = options.destFolderBase + contentType.path + fileName + extension;
         copyFile(contentType.templatePath, destPath, function() {
         console.log("Created " + destPath + "\n");
        
