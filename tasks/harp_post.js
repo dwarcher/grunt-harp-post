@@ -61,6 +61,7 @@ module.exports = function(grunt) {
     var baseContentType = {
       path: "posts/",
       templatePath: "templates/post.md",
+      fileDate: true,
       questions: [ 
         { 
           type: "input", 
@@ -116,7 +117,14 @@ module.exports = function(grunt) {
     inquirer.prompt( contentType.questions, function(answers) {
         var pickedDate = moment(answers.date, "MM-DD-YYYY");
         var sluggedTitle = slugify(answers.title);
-        var fileName = pickedDate.format("YYYY-MM-DD") + "-" + sluggedTitle;
+        var fileName;
+
+        if(options.fileDate)
+        {
+          fileName = pickedDate.format("YYYY-MM-DD") + "-" + sluggedTitle;
+        } else {
+          fileName = sluggedTitle;
+        }
 
         // add extra date info
         answers.date = pickedDate.format();

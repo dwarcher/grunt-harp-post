@@ -61,6 +61,12 @@ Default value: `posts/`
 
 The location to put your new content type (relative to `options.destFolderBase`). 
 
+#### options.fileDate
+Type: `Boolean`
+Default value: `true`
+
+Controls whether the date is added as part of the file name
+
 #### options.fields
 Type: `Array`
 Default value: `templates/post.md`
