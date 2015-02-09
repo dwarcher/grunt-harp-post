@@ -1,7 +1,7 @@
 {
   "name": "grunt-harp-post",
   "description": "Task that interactively creates blog posts or other content for HARP",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/dwarcher/grunt-harp-post",
   "author": {
     "name": "Dave Wallin",

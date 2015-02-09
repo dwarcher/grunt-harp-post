@@ -124,6 +124,11 @@ module.exports = function(grunt) {
         answers.day = pickedDate.format("DD");
         answers.year =pickedDate.format("YYYY");
 
+        if(options.callback)
+        {
+          options.callback(answers);
+        }
+
         // update blog entries..
         blogEntries[fileName] = answers;
 

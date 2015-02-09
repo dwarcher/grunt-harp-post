@@ -71,6 +71,11 @@ See the great [Inquirer.js](https://github.com/SBoudrias/Inquirer.js/) for instr
 
 By default, `title` and `Date` questions will be asked (and cannot be removed).
 
+#### options.calback
+Type: `Function`
+Parameters: (answers)
+
+If defined, will call a function and pass the answers so you can do additional work.
 
 ### Usage Examples
 
